@@ -536,5 +536,9 @@ display: inline-block;
   .modal-container textarea{
   width: 100%;
   }
+  .user_info{
+    display: block;
+    flex-direction: column;
+  }
 }
 </style>
