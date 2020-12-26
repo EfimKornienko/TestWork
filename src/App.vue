@@ -3,17 +3,21 @@
     <header>
       <h1>Welcome to TestPage</h1>
     </header>
-    <Cards/>
+    <div> 
+      <Main/>
+    </div>
+
+    <!-- <Cards posts/> -->
   </div>
 </template>
 
 <script>
-import Cards from './components/Cards.vue'
+import Main from './components/Main.vue'
 
 export default {
   name: 'App',
   components: {
-    Cards
+    Main
   }
 }
 </script>
