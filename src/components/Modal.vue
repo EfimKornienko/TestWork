@@ -27,15 +27,15 @@
 
             <div class="modal-footer">
               <slot name="footer">
-                <button @click="close_modal()" class="modal-default-button">
+                <button @click="$emit('close_modal')" class="modal-default-button">
                   Back
                 </button>
                 <button v-if="modal_add == true" class="modal-default-button" 
-                @click="create_post(new_title,new_body),new_title='',new_body= ''">
+                @click="$emit('create_post',new_title,new_body),new_title='',new_body= ''">
                   Create
                 </button>
                 <button v-if="modal_edit == true" class="modal-default-button" 
-                @click="edit_post(edit_id,new_title,new_body),new_title ='',new_body= ''">
+                @click="$emit('edit_post',edit_id,new_title,new_body),new_title ='',new_body= ''">
                   Edit
                 </button>
               </slot>
@@ -43,10 +43,10 @@
           </div>
 
           <div v-else class="delete_buttons">
-            <button @click="close_modal()" class="modal-default-button">
+            <button @click="$emit('close_modal')" class="modal-default-button">
               No
             </button>
-            <button class="modal-default-button" @click="delete_post()">
+            <button class="modal-default-button delete_btn" @click="$emit('delete_post',delete_id)">
               Delete
             </button>
           </div>
@@ -99,51 +99,85 @@ export default {
                 return null
             }
         }   
-    },
-    methods: {
-        create_post(title,body){
-        if(title !== '' && body !== ''){
-            let newPost = {
-            id: this.$parent.$parent.$data.posts.length + 1,
-            userId: 1,
-            title: title,
-            body: body
-        }
-        this.$parent.$parent.posts.push(newPost)
-        console.log(newPost)
-        }
-        this.$parent.modal = false
-        this.$parent.modal_add = false
-        },
-        edit_post(id,title,body){
-        if(title !== '' && body !== ''){
-            this.$parent.$parent.$data.posts[id - 1].title = title,
-            this.$parent.$parent.$data.posts[id - 1].body = body,
-            this.$parent.edit_id = null
-            }
-            this.$parent.modal_edit =false
-            this.$parent.modal = false
-        },
-        delete_post(id){
-        if(id !== this.$parent.$parent.$data.posts.length){
-            this.$parent.$parent.$data.posts.splice(id - 1,1)
-            console.log(this.posts)
-            this.$parent.$parent.$data.posts.forEach(post => {
-            post.id -= 1
-            });
-        }
-        else{
-            this.$parent.$parent.posts.splice(id - 1,1)
-        }
-        this.$parent.modal = false 
-        this.$parent.delete_status = false
-        },
-        close_modal(){
-            this.$parent.modal = false
-            this.$parent.modal_edit =false
-            this.$parent.modal_add = false
-            this.$parent.delete_status = false   
-        }
     }
 }
 </script>
+
+<style scoped>
+.modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: table;
+    transition: opacity 0.3s ease;
+  }
+  .modal-mask p{
+    font-size: 18px;
+  }
+  .modal-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .modal-container {
+    width: 400px;
+    height: 300px;
+    margin: 0px auto;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+    transition: all 0.3s ease;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  .modal-container textarea{
+    width: 300px;
+    height: 50px;
+  }
+  .modal-container button{
+    font-size: 13px;
+    margin-left: 10px;
+    padding: 6px 4px 4px 4px;
+    border: 1px solid black;
+      background: #F6F6f6;
+      border-radius: 8px;
+  }
+  .warning_title{
+    font-size: 25px;
+    margin-top: 25%;
+    text-align: center;
+  }
+  .delete_buttons button{
+    font-size: 17px;
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-right: 25%;
+  }
+  .delete_btn{
+    color: red;
+  }
+  .modal-header h3 {
+    margin-top: 0;
+    color: #42b983;
+  }
+  .modal-body {
+    margin: 20px 0;
+  }
+  .modal-default-button {
+    float: right;
+  }
+  .modal-enter {
+    opacity: 0;
+  }
+  .modal-leave-active {
+    opacity: 0;
+  }
+  .modal-enter .modal-container,
+  .modal-leave-active .modal-container {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+</style>

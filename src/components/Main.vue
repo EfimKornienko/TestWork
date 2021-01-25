@@ -16,28 +16,32 @@
             :posts = "posts"
             :comments = "comments"
             :users = "users"
-        />
+            @create_post = "create_post"
+            @edit_post = "edit_post"
+            @delete_post = "delete_post"
+          />
         </div>
         <div v-else> 
-            <Search
-                :search_post_array = "search_post_array"
-                :search_comments_array = "search_comments_array"
-                :search_users_array = "search_users_array"
-            />
+          <AllCards
+            :posts = "search_post_array"
+            :comments = "search_comments_array"
+            :users = "search_users_array"
+            @create_post = "create_post"
+            @edit_post = "edit_post"
+            @delete_post = "delete_post"
+          />
         </div>
     </div>
   </div>
 </template>
 
 <script>
-import Search from './Search.vue'
 import Loader from './Loader.vue'
 import AllCards from './AllCards.vue'
 
 export default {
   name: 'Main',
   components: {
-    Search,
     Loader,
     AllCards
   },
@@ -104,23 +108,43 @@ export default {
           });
         }
         console.log(this.search_post_array,this.search_comments_array,this.search_users_array)
+      },
+      create_post(title,body){
+        if(title !== '' && body !== ''){
+          let newPost = {
+          id: this.posts.length + 1,
+          userId: 1,
+          title: title,
+          body: body
+        }
+        this.posts.push(newPost)
+        console.log(newPost)
+        }
+      },
+      edit_post(id,title,body){
+        if(title !== '' && body !== ''){
+        this.posts[id - 1].title = title,
+        this.posts[id - 1].body = body
+        }
+      },
+      delete_post(id){
+        if(id !== this.posts.length){
+          this.posts.splice(id - 1,1)
+          console.log(this.posts)
+          this.posts.forEach(post => {
+          post.id -= 1
+        });
+        }
+        else{
+          this.posts.splice(id - 1,1)
+        }
       }
     }
   }
 </script>
 
 <style lang="scss">
-.all_cards{
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr; 
-  margin: 0 auto;
-  padding-right: 25%;
-  padding-left: 25%;
-  margin-top: 15px;
-  box-sizing: border-box;
-  margin-bottom: 10%;
-}
+
 .input_group{
   padding-right: 25%;
   padding-left: 25%;

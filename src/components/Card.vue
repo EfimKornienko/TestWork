@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div v-if="users != null && comments != null">
-            <div v-for="user in users.filter(user => user.id == post.userId)" :key="user.id">
+            <div v-for="user in filter_users" :key="user.id">
                 <div class="post">
                     <h3 class="post_title">{{ post.title }}</h3>
                     <p class="post_body">{{ post.body  }}</p>
@@ -16,13 +16,13 @@
                         <p> Tlephone number: {{user.phone}} </p>
                     </div>
                     <div class="button_group">
-                        <button @click="edit_button()">Edit</button>
-                        <button @click="delete_button()">Delete</button>
+                        <button @click="$emit('edit_card',post.id)">Edit</button>
+                        <button @click="$emit('delete_card',post.id)">Delete</button>
                     </div>
                 </div>           
                 <div class="comments">
                     <h3>Comments:</h3>
-                        <div class="comment" :class="{show : show_comments}" v-for="comment in comments.filter(comment => comment.postId == post.id)" :key="comment.id">
+                        <div class="comment" :class="{show : show_comments}" v-for="comment in filter_comments" :key="comment.id">
                             <div>
                                 <h4 class="comment_title">{{comment.name}}</h4>
                                 <p class="comment_body">{{comment.body}}</p>
@@ -62,17 +62,13 @@ export default {
             }
         }   
     },
-    methods: {
-        edit_button(){ 
-            this.$parent.modal = true
-            this.$parent.modal_edit = true
-            this.$parent.edit_id = this.post.id
-        },
-        delete_button(){
-            this.$parent.modal = true
-            this.$parent.delete_status = true
-            this.$parent.delete_id = this.post.id
-        }
+    computed: {
+      filter_users(){
+        return this.users.filter(user => user.id == this.post.userId)
+      },
+      filter_comments(){
+        return this.comments.filter(comment => comment.postId == this.post.id)
+      }
     }
 }
 </script>
