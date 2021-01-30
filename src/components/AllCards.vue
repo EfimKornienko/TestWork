@@ -2,15 +2,15 @@
   <div class="all_cards">
     <!-- Полный список постов -->
     <button class="add_button" @click="modal = true, modal_add = true">Add post</button>
-      <div v-for="post in posts" :key="post.id">
-        <Card
-          :post = 'post'
-          :users = 'users'
-          :comments = 'comments'
-          @edit_card="edit_card"
-          @delete_card="delete_card"
-        />
-      </div>
+    <div v-for="post in posts" :key="post.id">
+      <Card
+        :post = "post"
+        :users = "users"
+        :comments = "comments"
+        @edit_card="edit_card"
+        @delete_card="delete_card"
+      />
+    </div>
     <div v-if="modal == true">
       <Modal
         :modal =  "modal"
@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import Modal from './Modal.vue'
-import Card from './Card.vue'
+import Modal from './Modal'
+import Card from './Card'
 export default {
   name: 'AllCards',
   components:{
@@ -79,10 +79,10 @@ export default {
       this.delete_id = post
     },
     close_modal(){
-        this.modal = false
-        this.modal_edit =false
-        this.modal_add = false
-        this.delete_status = false   
+      this.modal = false
+      this.modal_edit =false
+      this.modal_add = false
+      this.delete_status = false   
     },
     create_post(title,body){
       this.modal = false
@@ -106,6 +106,7 @@ export default {
 
 </script>
 <style scoped>
+
 .all_cards{
   width: 100%;
   display: grid;
@@ -116,5 +117,15 @@ export default {
   margin-top: 15px;
   box-sizing: border-box;
   margin-bottom: 10%;
+}
+.add_button{
+  width: 25%;
+}
+@media screen and (max-width: 1024px) {
+  .all_cards{
+    grid-template-columns: 1fr;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
 }
 </style>
