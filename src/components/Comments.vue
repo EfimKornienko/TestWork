@@ -1,11 +1,16 @@
 <template>
   <div class="comments">
     <h3>Comments:</h3>
-    <div class="comment" :class="{show : show_comments}" v-for="comment in comments" :key="comment.id">
+    <div
+      class="comment"
+      :class="{ show: showComments }"
+      v-for="comment in comments"
+      :key="comment.id"
+    >
       <div>
-        <h4 class="comment_title">{{comment.name}}</h4>
-        <p class="comment_body">{{comment.body}}</p>
-        <p class="comment_email">{{comment.email}}</p>
+        <h4 class="comment-title">{{ comment.name }}</h4>
+        <p class="comment-body">{{ comment.body }}</p>
+        <p class="comment-email">{{ comment.email }}</p>
       </div>
     </div>
   </div>
@@ -13,8 +18,8 @@
 
 <script>
 export default {
-  name: "Post",
-  
+  name: 'Post',
+
   props: {
     comments: {
       type: Array,
@@ -22,42 +27,42 @@ export default {
         return null
       }
     },
-    show_comments: {
+    showComments: {
       type: Boolean,
       default() {
         return false
       }
-    } 
+    }
   }
 }
 </script>
 
 <style scoped>
-.comments{
+.comments {
   margin-top: 10px;
 }
-.comment{
+.comment {
   margin-top: 20px;
-  } 
-.comment p{
-    margin-bottom: 5px;
 }
-.comment_email{
+.comment p {
+  margin-bottom: 5px;
+}
+.comment-email {
   padding-bottom: 5px;
   border-bottom: solid 1px black;
 }
-.comment_button{
+.comment-button {
   all: unset;
-  color:blue;
+  color: blue;
   margin-top: 10px;
 }
-.comment{
-    display: block;
+.comment {
+  display: block;
 }
-.comment:nth-child(n + 5){
-    display: none;
-} 
-.show:nth-child(n + 5){
-    display: block;
+.comment:nth-child(n + 5) {
+  display: none;
+}
+.show:nth-child(n + 5) {
+  display: block;
 }
 </style>

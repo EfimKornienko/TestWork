@@ -3,8 +3,8 @@
     <header>
       <h1>Welcome to TestPage</h1>
     </header>
-    <div> 
-      <Main/>
+    <div>
+      <Main />
     </div>
 
     <!-- <Cards posts/> -->
@@ -31,11 +31,10 @@ export default {
   margin-top: 60px;
 }
 * {
-  margin:0;
+  margin: 0;
   padding: 0;
 }
 header {
   text-align: center;
-  
 }
 </style>
