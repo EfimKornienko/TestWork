@@ -1,23 +1,17 @@
 <template>
   <div>
-    <div v-if="posts === null || posts.length === 0">
-      <Loader />
-    </div>
-    <div v-else>
-      <div class="input-group">
-        <button v-if="searchShow" @click="closeButton">
-          Back
-        </button>
-        <input v-model="searchValue" placeholder="Edit me" />
-        <button v-if="searchValue !== ''" @click="searchValue = ''">
-          Clean
-        </button>
-        <button @click="searchPost()">Search</button>
-      </div>
+    <InputGroup
+      :searchShow="searchShow"
+      @searchPost="searchPost"
+      @closeButton="closeButton"
+    />
 
-      <div v-if="searchShow !== true">
+    <Loader v-if="!posts.length || !comments.length || !users.length" />
+
+    <div v-else>
+      <div v-if="searchShow">
         <AllCards
-          :posts="posts"
+          :posts="searchPostArray"
           :comments="comments"
           :users="users"
           @createPost="createPost"
@@ -27,7 +21,7 @@
       </div>
       <div v-else>
         <AllCards
-          :posts="searchPostArray"
+          :posts="posts"
           :comments="comments"
           :users="users"
           @createPost="createPost"
@@ -42,20 +36,21 @@
 <script>
 import Loader from './Loader'
 import AllCards from './AllCards'
+import InputGroup from './InputGroup'
 import { getPosts, getComments, getUsers } from '../queries'
 
 export default {
   name: 'Main',
   components: {
     Loader,
-    AllCards
+    AllCards,
+    InputGroup
   },
   data: () => ({
-    posts: null,
-    comments: null,
-    users: null,
+    posts: [],
+    comments: [],
+    users: [],
 
-    searchValue: '',
     searchShow: false,
     searchPostArray: []
   }),
@@ -66,8 +61,7 @@ export default {
     this.users = getUsers
   },
   methods: {
-    searchPost() {
-      let value = this.searchValue
+    searchPost(value) {
       if (value != '') {
         value = value.replace(/\s/g, '').toLowerCase()
         this.searchPostArray = this.posts.filter(
@@ -112,38 +106,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.input-group {
-  padding-right: 25%;
-  padding-left: 25%;
-  margin-top: 15px;
-}
-@media screen and (max-width: 1024px) {
-  .input-group {
-    padding-right: 15px;
-    padding-left: 15px;
-  }
-}
-@media screen and (max-width: 500px) {
-  .modal-container {
-    width: 200px;
-    height: 300px;
-    margin: 0px auto;
-    padding: 20px 30px;
-    background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-    transition: all 0.3s ease;
-    font-family: Helvetica, Arial, sans-serif;
-  }
-  .modal-container textarea {
-    width: 100%;
-  }
-  .user-info {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
-}
-</style>

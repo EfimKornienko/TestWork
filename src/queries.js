@@ -4,6 +4,7 @@ const request1 = fetch('http://jsonplaceholder.typicode.com/posts').then((r) =>
 const request2 = fetch(
   'http://jsonplaceholder.typicode.com/comments'
 ).then((r) => r.json())
+
 const request3 = fetch('https://jsonplaceholder.typicode.com/users').then((r) =>
   r.json()
 )
@@ -22,5 +23,4 @@ Promise.all([request1, request2, request3]).then((data) => {
     getUsers.push(element)
   })
 })
-
 export { getPosts, getComments, getUsers }
