@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'Post',
+  name: 'CardComments',
 
   props: {
     comments: {

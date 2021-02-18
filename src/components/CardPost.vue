@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'Post',
+  name: 'CardPost',
 
   props: {
     post: {
