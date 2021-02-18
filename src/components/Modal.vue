@@ -29,7 +29,7 @@
 
           <div class="modal-footer">
             <slot name="footer">
-              <button @click="$emit('closeModal')" class="modal-default-button">
+              <button class="modal-default-button" @click="$emit('closeModal')">
                 Back
               </button>
               <button
@@ -51,12 +51,12 @@
         </div>
 
         <div v-else class="delete-buttons">
-          <button @click="$emit('closeModal')" class="modal-default-button">
+          <button class="modal-default-button" @click="$emit('closeModal')">
             No
           </button>
           <button
-            @click="$emit('deletePost', deleteId)"
             class="modal-default-button delete-btn"
+            @click="$emit('deletePost', deleteId)"
           >
             Delete
           </button>

@@ -2,10 +2,10 @@
   <div class="comments">
     <h3>Comments:</h3>
     <div
-      class="comment"
-      :class="{ show: showComments }"
       v-for="comment in comments"
       :key="comment.id"
+      class="comment"
+      :class="{ show: showComments }"
     >
       <div>
         <h4 class="comment-title">{{ comment.name }}</h4>

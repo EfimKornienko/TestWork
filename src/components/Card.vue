@@ -1,18 +1,16 @@
 <template>
   <div class="card">
-    <div v-if="users !== null && comments !== null">
-      <div v-for="user in filterUsers" :key="user.id">
-        <CardPost
-          :post="post"
-          :user="user"
-          @editCard="editCard"
-          @deleteCard="deleteCard"
-        />
-        <CardComments :comments="filterComments" :showComments="showComments" />
-        <button @click="showComments = !showComments">
-          Show more comments
-        </button>
-      </div>
+    <div v-for="user in filterUsers" :key="user.id">
+      <CardPost
+        :post="post"
+        :user="user"
+        @editCard="editCard"
+        @deleteCard="deleteCard"
+      />
+      <CardComments :comments="filterComments" :showComments="showComments" />
+      <button @click="showComments = !showComments">
+        Show more comments
+      </button>
     </div>
   </div>
 </template>
