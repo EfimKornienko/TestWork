@@ -3,7 +3,7 @@
     <button v-if="searchShow" class="back-btn" @click="$emit('closeButton')">
       Back
     </button>
-    <input v-model="searchValue" placeholder="Edit me" />
+    <input v-model.trim="searchValue" placeholder="Edit me" />
     <button v-if="searchValue !== ''" @click="searchValue = ''">
       Clean
     </button>

@@ -65,9 +65,9 @@ export default {
   methods: {
     searchPost(value) {
       if (value != '') {
-        value = value.replace(/\s/g, '').toLowerCase()
+        value = value.toLowerCase()
         this.searchPostArray = this.posts.filter(
-          (post) => post.title.replace(/\s/g, '').toLowerCase() === value,
+          (post) => post.title.trim().toLowerCase() === value,
         )
       }
       this.searchShow = true
