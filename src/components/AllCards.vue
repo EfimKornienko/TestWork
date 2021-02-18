@@ -34,42 +34,43 @@ export default {
   name: 'AllCards',
   components: {
     Modal,
-    Card
+    Card,
   },
-  data: () => ({
-    modal: false,
-    modalAdd: false,
-    modalEdit: false,
+  data() {
+    return {
+      modal: false,
+      modalAdd: false,
+      modalEdit: false,
 
-    // данные для Add, Edit и Delete
-    editId: null,
-    deleteId: null,
-    deleteStatus: false
-  }),
+      editId: null,
+      deleteId: null,
+      deleteStatus: false,
+    }
+  },
   props: {
     posts: {
       type: Array,
       default() {
         return null
-      }
+      },
     },
     comments: {
       type: Array,
       default() {
         return null
-      }
+      },
     },
     users: {
       type: Array,
       default() {
         return null
-      }
-    }
+      },
+    },
   },
   methods: {
     modalAddBtn() {
       this.modal = true
-      this.modalSdd = true
+      this.modalAdd = true
     },
     editCard(post) {
       this.modal = true
@@ -102,29 +103,7 @@ export default {
       this.modal = false
       this.deleteStatus = false
       this.$emit('deletePost', id)
-    }
-  }
+    },
+  },
 }
 </script>
-<style scoped>
-.all-cards {
-  width: 50%;
-  display: grid;
-  grid-template-columns: 1fr;
-  margin: 0 auto;
-  margin-top: 15px;
-  box-sizing: border-box;
-  margin-bottom: 10%;
-}
-.add-button {
-  width: 25%;
-}
-@media screen and (max-width: 1024px) {
-  .all-cards {
-    grid-template-columns: 1fr;
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-  }
-}
-</style>

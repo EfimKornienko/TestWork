@@ -1,6 +1,6 @@
 <template>
   <div class="input-group">
-    <button v-if="searchShow" @click="$emit('closeButton')">
+    <button v-if="searchShow" class="back-btn" @click="$emit('closeButton')">
       Back
     </button>
     <input v-model="searchValue" placeholder="Edit me" />
@@ -14,7 +14,7 @@
 export default {
   data() {
     return {
-      searchValue: ''
+      searchValue: '',
     }
   },
   props: {
@@ -22,21 +22,8 @@ export default {
       type: Boolean,
       default() {
         return false
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>
-<style scoped>
-.input-group {
-  padding-right: 25%;
-  padding-left: 25%;
-  margin-top: 15px;
-}
-@media screen and (max-width: 1024px) {
-  .input-group {
-    padding-right: 15px;
-    padding-left: 15px;
-  }
-}
-</style>

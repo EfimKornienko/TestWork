@@ -6,7 +6,7 @@
       @closeButton="closeButton"
     />
 
-    <Loader v-if="!posts.length || !comments.length || !users.length" />
+    <Loader v-if="!posts.length" />
 
     <div v-else>
       <div v-if="searchShow">
@@ -44,16 +44,18 @@ export default {
   components: {
     Loader,
     AllCards,
-    InputGroup
+    InputGroup,
   },
-  data: () => ({
-    posts: [],
-    comments: [],
-    users: [],
+  data() {
+    return {
+      posts: [],
+      comments: [],
+      users: [],
 
-    searchShow: false,
-    searchPostArray: []
-  }),
+      searchShow: false,
+      searchPostArray: [],
+    }
+  },
 
   mounted() {
     this.posts = getPosts
@@ -65,7 +67,7 @@ export default {
       if (value != '') {
         value = value.replace(/\s/g, '').toLowerCase()
         this.searchPostArray = this.posts.filter(
-          (post) => post.title.replace(/\s/g, '').toLowerCase() === value
+          (post) => post.title.replace(/\s/g, '').toLowerCase() === value,
         )
       }
       this.searchShow = true
@@ -76,7 +78,7 @@ export default {
           id: this.posts.length + 1,
           userId: 1,
           title: title,
-          body: body
+          body: body,
         }
         this.posts.push(newPost)
         console.log(newPost)
@@ -102,7 +104,7 @@ export default {
     closeButton() {
       this.searchShow = false
       this.searchPostArray = []
-    }
-  }
+    },
+  },
 }
 </script>

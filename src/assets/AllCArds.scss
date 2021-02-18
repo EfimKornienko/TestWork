@@ -1,0 +1,20 @@
+.all-cards {
+  width: 50%;
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 0 auto;
+  margin-top: 15px;
+  box-sizing: border-box;
+  margin-bottom: 10%;
+  .add-button {
+    width: 150px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .all-cards {
+    grid-template-columns: 1fr;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}

@@ -6,8 +6,6 @@
     <div>
       <Main />
     </div>
-
-    <!-- <Cards posts/> -->
   </div>
 </template>
 
@@ -17,12 +15,13 @@ import Main from './components/Main.vue'
 export default {
   name: 'App',
   components: {
-    Main
-  }
+    Main,
+  },
 }
 </script>
-
 <style>
+@import './assets/style.scss';
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

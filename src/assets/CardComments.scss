@@ -1,0 +1,20 @@
+.comments {
+  margin-top: 10px;
+}
+.comment {
+  margin-top: 20px;
+  display: block;
+  p {
+    margin-bottom: 5px;
+  }
+  &:nth-child(n + 5) {
+    display: none;
+  }
+}
+.comment-email {
+  padding-bottom: 5px;
+  border-bottom: solid 1px $black;
+}
+.show:nth-child(n + 5) {
+  display: block;
+}
